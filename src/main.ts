@@ -1,11 +1,9 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { Component } from '@angular/core';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {App} from './app/app';
+import {provideHttpClient} from '@angular/common/http';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  template: `<h1>Hello, World!</h1>`
-})
-class App {}
-
-bootstrapApplication(App);
+bootstrapApplication(App, {
+    providers: [
+        provideHttpClient()
+    ]
+}).catch(err => console.error(err));
