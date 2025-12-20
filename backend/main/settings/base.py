@@ -13,7 +13,7 @@ DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "corsheaders"
+    "corsheaders",
 ]
 
 API_APPS = [
@@ -45,4 +45,4 @@ USE_TZ = True
 
 # ============================================================== [HOST SETTINGS]
 ALLOWED_HOSTS = [".localhost", "127.0.0.1"]
-CORS_ALLOWED_ORIGINS = ["http://localhost:4200"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:4200", "http://127.0.0.1:4200"]

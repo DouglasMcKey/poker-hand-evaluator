@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {SharedModule} from "./shared/shared-module";
 import {FormsModule} from "@angular/forms";
+import {PokerService} from "./services/poker";
 
 @Component({
     selector: 'app-root',
@@ -9,9 +10,11 @@ import {FormsModule} from "@angular/forms";
     styleUrl: './app.css'
 })
 export class App implements OnInit {
+    constructor(private pokerService: PokerService) {}
+
     masterDeck: any[] = [];
     selectedHand: any[] = [null, null, null, null, null]
-    evaluationResult = "";
+    evaluationResult = signal<string | null>(null);
 
     ngOnInit() {
         this.generateDeck();
@@ -43,7 +46,7 @@ export class App implements OnInit {
                     id: idCounter++,
                     face_value: card[1],
                     value: suite.offset + (card[0] as number),
-                    display: `${card[1]} of ${suite.name}`
+                    suite: `${suite.name}`
                 })
             })
         })
@@ -52,24 +55,29 @@ export class App implements OnInit {
     getAvailableCards() {
         /**
          * Returns a filtered deck of cards by filtering the masterDeck and
-         * excludes the cards already picked by hand slots.
+         * excludes the cards already picked by any hand slot.
          */
         return this.masterDeck.filter(card => {
             // Check if card is already selected in any of the other hand slots.
             const isPicked = this.selectedHand.some(selected => selected?.id === card.id);
-
             // Return cards not picked.
             return !isPicked;
         });
     }
 
     onsubmit() {
-        console.log("Hand to evaluate:", this.selectedHand);
-        this.evaluationResult = "Return the result here!";
+        this.pokerService.evaluateHand(this.selectedHand).subscribe({
+            next: (response) => {
+                this.evaluationResult.set(response.message);
+            },
+            error: (error) => {
+                this.evaluationResult.set(error.message);
+            }
+        });
     }
 
     resetForm() {
         this.selectedHand = [null, null, null, null, null];
-        this.evaluationResult = ""
+        this.evaluationResult.set("");
     }
 }

@@ -7,17 +7,20 @@
                 <label>Card {{ $index + 1 }}</label>
                 <select [(ngModel)]="selectedHand[$index]" name="card-{{$index}}" required>
                     @for (card of getAvailableCards(); track card.id) {
-                        <option [ngValue]="card">{{ card.display}}</option>
+                        <option [ngValue]="card">{{ card.face_value }} of {{ card.suite }}</option>
                     }
                 </select>
 
                 @if (selectedHand[$index]) {
                     <div class="card-details selected">
-                        <strong>{{ selectedHand[$index].display }}</strong>
+                        <strong>
+                            {{ selectedHand[$index].face_value }} of<br>
+                            {{ selectedHand[$index].suite }}
+                        </strong>
                     </div>
                 } @else {
                     <div class="card-details">
-                        <strong>Select a card.</strong>
+                        <strong>Select a<br>card.</strong>
                     </div>
                 }
             </div>
@@ -30,5 +33,5 @@
 </form>
 
 <div class="evaluation-result">
-    @if (evaluationResult) {{{ evaluationResult }}} @else {<p>Hand ranking will appear here.</p>}
+    @if (evaluationResult()) {{{ evaluationResult() }}} @else {<p>Hand ranking will appear here.</p>}
 </div>
