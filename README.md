@@ -1,14 +1,80 @@
 # PokerHandEvaluator
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+Welcome to Poker Hand Evaluator. A tool to quickly rank a five card poker hand.
 
-## Development server
+This project was built with the following:
+- [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+- [Django](https://www.djangoproject.com) version 6
 
-To start a local development server, run:
+---
 
+## Development Servers
+
+The project requires two servers:
+- Angular - Manages the front end.
+- Django - Manages the back end.
+
+---
+
+### Run the Front-End Server:
+
+To start the front-end server. Navigate to the project's frontend folder:
+
+`poker-hand-evaluator/front-end/`
+
+and execute the following command:
 ```bash
 ng serve
 ```
+
+---
+
+## Front-End Server Setup
+### Node.js
+
+Go to https://nodejs.org
+
+Download the LTS (Long Term Support) version.
+Run the installer and follow the instructions.
+
+This will install:
+- Node.js
+- npm (package manager for Node.js)
+
+#### Helpful Commands:
+
+```bash
+node -v
+```
+
+```bash
+npm -v
+```
+
+---
+
+### Angular
+
+Install Angular.
+
+#### Helpful Commands:
+
+```bash
+npm install -g @angular/cli
+```
+
+```bash
+ng version
+```
+
+---
+
+---
+---
+
+---
+
+
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 

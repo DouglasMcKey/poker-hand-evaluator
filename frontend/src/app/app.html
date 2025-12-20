@@ -1,0 +1,34 @@
+<app-header-component></app-header-component>
+
+<form #pokerHandForm="ngForm" (ngSubmit)="onsubmit()">
+    <div class="card-container">
+        @for (_ of selectedHand; track $index) {
+            <div class="card-slot">
+                <label>Card {{ $index + 1 }}</label>
+                <select [(ngModel)]="selectedHand[$index]" name="card-{{$index}}" required>
+                    @for (card of getAvailableCards(); track card.id) {
+                        <option [ngValue]="card">{{ card.display}}</option>
+                    }
+                </select>
+
+                @if (selectedHand[$index]) {
+                    <div class="card-details selected">
+                        <strong>{{ selectedHand[$index].display }}</strong>
+                    </div>
+                } @else {
+                    <div class="card-details">
+                        <strong>Select a card.</strong>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div class="button-group">
+        <button type="submit" [disabled]="!pokerHandForm.valid">Evaluate Hand</button>
+        <button type="button" (click)="resetForm()">Reset</button>
+    </div>
+</form>
+
+<div class="evaluation-result">
+    @if (evaluationResult) {{{ evaluationResult }}} @else {<p>Hand ranking will appear here.</p>}
+</div>
