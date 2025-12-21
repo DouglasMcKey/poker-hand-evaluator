@@ -20,30 +20,47 @@ from backend.api.tests.fixtures import create_hand_royal_flush
 from backend.api.interface import PokerHandInterface
 
 
-def get_cards():
+def get_cards(
+    royal_flush: bool = True
+) -> list:
     """
     Returns five poker hand cards that can be used to test the PokerHandInterface.
     """
-    poker_cards = create_hand_royal_flush()
+    if royal_flush:
+        return create_hand_royal_flush()
 
-    return poker_cards
+    return []
 
 
-def test_is_valid(cards):
+def test_is_valid():
+    cards = get_cards(royal_flush=True)
     poker_hand = PokerHandInterface(cards)
     print(poker_hand.is_valid())
 
 
-def test_get_ranking(cards):
+def test_is_flush():
+    cards = get_cards(royal_flush=True)
+    poker_hand = PokerHandInterface(cards)
+    print(poker_hand.is_flush())
+
+
+def test_is_royal_flush():
+    cards = get_cards(royal_flush=True)
+    poker_hand = PokerHandInterface(cards)
+    print(poker_hand.is_royal_flush())
+
+
+def test_get_ranking():
+    cards = get_cards(royal_flush=True)
     poker_hand = PokerHandInterface(cards)
     print(poker_hand.get_ranking())
 
 
 def main():
-    cards = get_cards()
-
-    test_is_valid(cards)
-    # test_get_ranking(cards)
+    # test_is_valid()
+    # test_is_royal_flush()
+    # test_is_flush()
+    # test_get_ranking()
     print("Done!")
 
 

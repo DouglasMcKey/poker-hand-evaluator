@@ -27,14 +27,14 @@ def evaluate_poker_hand(request: HttpRequest) -> JsonResponse:
         received_cards = json.loads(request.body).get("cards")
 
         poker_hand = PokerHandInterface(received_cards)
-        if not poker_hand.is_valid(received_cards):
+        if not poker_hand.is_valid():
             response.update({
                 "status": "error",
                 "message": "Invalid poker hand"
             })
 
         else:
-            result = poker_hand.get_ranking
+            result = poker_hand.get_ranking()
             response.update({
                 "status": "success",
                 "message": result

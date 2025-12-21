@@ -13,16 +13,18 @@ class TestAPIPokerHandInterface(SimpleTestCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.royal_flush = create_hand_royal_flush()
+        cls.royal_flush_hand, cls.royal_flush_suit = create_hand_royal_flush()
 
     def test_is_valid(self):
-        poker_hand = PokerHandInterface(self.royal_flush)
+        poker_hand = PokerHandInterface(self.royal_flush_hand)
         self.assertTrue(poker_hand.is_valid())
 
-        invalid_poker_hand = []
-        poker_hand = PokerHandInterface(invalid_poker_hand, validate_hand=True)
+        invalid_hand = []
+        poker_hand = PokerHandInterface(invalid_hand, validate_hand=True)
         self.assertFalse(poker_hand.is_valid())
 
-    # def test_royal_flush(self):
-    #     poker_hand = PokerHandInterface(self.royal_flush)
-    #     self.assertTrue(poker_hand.is_royal_flush())
+    def test_royal_flush(self):
+        poker_hand = PokerHandInterface(self.royal_flush_hand)
+        is_royal_flush = poker_hand.is_royal_flush()
+        expected_result = (True, self.royal_flush_suit)
+        self.assertTupleEqual(is_royal_flush, expected_result)

@@ -33,5 +33,5 @@
 </form>
 
 <div class="evaluation-result">
-    @if (evaluationResult()) {{{ evaluationResult() }}} @else {<p>Hand ranking will appear here.</p>}
+    @if (evaluationResult()) { <p>Rank: {{ evaluationResult() }}</p> } @else {<p>Hand ranking will appear here.</p>}
 </div>
