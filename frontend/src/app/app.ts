@@ -44,8 +44,8 @@ export class App implements OnInit {
             cardValues.forEach(card => {
                 this.masterDeck.push({
                     id: idCounter++,
-                    face_value: card[1],
                     value: suite.offset + (card[0] as number),
+                    face_value: card[1],
                     suite: `${suite.name}`
                 })
             })
