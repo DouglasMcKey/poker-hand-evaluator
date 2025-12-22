@@ -1,6 +1,6 @@
 """
 This file contains scripts to quickly test the PokerHandInterface as functionality
-is being built. It serves for debugging purposes.
+is being built. It serves for debugging during development.
 """
 #!/usr/bin/env python
 import os

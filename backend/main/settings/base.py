@@ -37,6 +37,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# ========================================================= [TEMPLATES SETTINGS]
+BASE_DIRECTORY = Path(__file__).resolve(strict=True).parent.parent.parent
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIRECTORY / "templates"],
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth"
+            ]
+        }
+    }
+]
+
 # ============================================== [INTERNATIONALIZATION SETTINGS]
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"

@@ -1,9 +1,22 @@
 import json
 
+from django.contrib.auth.decorators import login_not_required
 from django.http import JsonResponse, HttpRequest, HttpResponseBadRequest, HttpResponse
+from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.interface import PokerHandInterface
+
+
+@login_not_required
+def index(
+    request: HttpRequest,
+    template_name: str = "index.html"
+) -> TemplateResponse:
+    """
+    This is the index page of the backend.
+    """
+    return TemplateResponse(request, template_name)
 
 
 @csrf_exempt

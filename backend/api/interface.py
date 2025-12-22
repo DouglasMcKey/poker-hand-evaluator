@@ -284,5 +284,6 @@ class PokerHandInterface():
             # TODO: is_two_pair
             # TODO: is_one_pair
             # TODO: else return high_card
+            return "This hand rank is not developed yet."
 
         return "Invalid Poker Hand."
