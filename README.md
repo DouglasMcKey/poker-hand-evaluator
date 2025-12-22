@@ -14,7 +14,7 @@ This project was built with the following:
 The project requires two servers:
 - Angular - Manages the front end.
 - Django - Manages the back end.
-- 
+
 To experience the application. Setup and run both the front-end and back-end servers.
 Then navigate to the front-end server URL: `http://localhost:4200/`
 
