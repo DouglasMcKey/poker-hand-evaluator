@@ -21,16 +21,22 @@ from backend.api.interface import PokerHandInterface
 
 
 def get_cards(
-    royal_flush: bool = True
+    royal_flush: bool = False
 ) -> list:
     """
     Returns five poker hand cards that can be used to test the PokerHandInterface.
     """
     if royal_flush:
-        return create_hand_royal_flush()
+        hand, _ = create_hand_royal_flush()
+        return hand
 
     return []
 
+
+def test_get_total_hand_value():
+    cards = get_cards(royal_flush=True)
+    poker_hand = PokerHandInterface(cards)
+    print(poker_hand.get_total_hand_value())
 
 def test_is_valid():
     cards = get_cards(royal_flush=True)
@@ -42,6 +48,7 @@ def test_is_flush():
     cards = get_cards(royal_flush=True)
     poker_hand = PokerHandInterface(cards)
     print(poker_hand.is_flush())
+    print(poker_hand.hand_suit)
 
 
 def test_is_royal_flush():
@@ -57,6 +64,7 @@ def test_get_ranking():
 
 
 def main():
+    # test_get_total_hand_value()
     # test_is_valid()
     # test_is_royal_flush()
     # test_is_flush()

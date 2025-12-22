@@ -30,9 +30,9 @@ export class App implements OnInit {
             [11, "Jack"], [12, "Queen"], [13, "King"], [14, "Ace"]
         ]
 
-        // The offset helps to distinguish between suites and should aid in
+        // The offset helps to distinguish between suits and should aid in
         // determining potential hand rankings later on.
-        const suites = [
+        const suits = [
             {name: "Hearts", offset: 100},
             {name: "Diamonds", offset: 200},
             {name: "Clubs", offset: 300},
@@ -40,13 +40,14 @@ export class App implements OnInit {
         ]
 
         let idCounter = 1;
-        suites.forEach(suite => {
+        suits.forEach(suit => {
             cardValues.forEach(card => {
                 this.masterDeck.push({
                     id: idCounter++,
-                    value: suite.offset + (card[0] as number),
-                    face_value: card[1],
-                    suite: `${suite.name}`
+                    value: suit.offset + (card[0] as number),
+                    face_value: card[0] as number,
+                    display: card[1],
+                    suit: `${suit.name}`
                 })
             })
         })
