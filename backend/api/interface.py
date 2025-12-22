@@ -14,7 +14,7 @@ class PokerHandInterface():
                     "suit": "Hearts"
                 },
         """
-        self.poker_hand = poker_hand
+        self.cards = poker_hand
 
         # Suit ranges.
         self.all_hearts = 500
@@ -40,39 +40,39 @@ class PokerHandInterface():
              True if valid, False otherwise.
         """
         # Simple validation on hand size.
-        if len(self.poker_hand) != 5:
+        if len(self.cards) != 5:
             return False
 
         return True
 
-    def sort_hard(self):
+    def sort_hand(self):
         """
         Sorts the poker hand in ascending order.
 
         Returns:
             list of the sorted poker hand.
         """
-        self.poker_hand.sort(key=lambda slot: slot["face_value"])
+        self.cards.sort(key=lambda slot: slot["face_value"])
 
     def set_high_and_low_cards(self):
         """
         Sets the high card and low card face value.
         """
-        self.sort_hard()
-        self.high_card = self.poker_hand[-1]
-        self.low_card = self.poker_hand[0]
+        self.sort_hand()
+        self.high_card = self.cards[-1]
+        self.low_card = self.cards[0]
 
     def set_card_face_values(self):
         """
         Sets the `card_face_values` variable to a list of the poker hand card face values.
         """
-        self.sort_hard()
+        self.sort_hand()
         self.card_face_values = [
-            self.poker_hand[0]["face_value"],
-            self.poker_hand[1]["face_value"],
-            self.poker_hand[2]["face_value"],
-            self.poker_hand[3]["face_value"],
-            self.poker_hand[4]["face_value"]
+            self.cards[0]["face_value"],
+            self.cards[1]["face_value"],
+            self.cards[2]["face_value"],
+            self.cards[3]["face_value"],
+            self.cards[4]["face_value"]
         ]
 
     def get_total_value(self) -> int:
@@ -83,7 +83,7 @@ class PokerHandInterface():
         Returns:
             int: The total `value` of the poker hand.
         """
-        return sum(card["value"] for card in self.poker_hand)
+        return sum(card["value"] for card in self.cards)
 
     def is_royal_flush(self) -> bool:
         """
@@ -142,6 +142,7 @@ class PokerHandInterface():
         Returns:
             True if hand is a four of a kind, False otherwise.
         """
+        self.set_card_face_values()
         face_values_set = set(self.card_face_values)
         if len(face_values_set) > 2:
             return False
@@ -162,8 +163,8 @@ class PokerHandInterface():
         Returns:
             True if hand is a full house, False otherwise.
         """
+        self.set_card_face_values()
         face_values_set = set(self.card_face_values)
-
         if len(face_values_set) > 2:
             return False
         else:
@@ -215,8 +216,9 @@ class PokerHandInterface():
         Returns:
             True if the hand is a straight, False otherwise.
         """
-        self.sort_hard()
+        self.sort_hand()
         self.set_high_and_low_cards()
+        self.set_card_face_values()
 
         # You can not have a straight if the lowest card is greater than 10.
         if self.low_card["face_value"] > 10:
@@ -239,7 +241,7 @@ class PokerHandInterface():
 
             result = self.card_face_values == sequential_face_values
             if result:
-                self.high_card = self.poker_hand[-2]
+                self.high_card = self.cards[-2]
                 return result
 
         return False
@@ -283,4 +285,4 @@ class PokerHandInterface():
             # TODO: is_one_pair
             # TODO: else return high_card
 
-        return "Unable to determine the poker hand ranking."
+        return "Invalid Poker Hand."
